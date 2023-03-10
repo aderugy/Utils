@@ -29,7 +29,7 @@
 
 
 
-echo 'Welcome to the Rugy SQL Table Export tool.'
+echo 'Welcome to the Rugy MySQL Table Export Tool.'
 echo ''
 echo "Current location: $PWD"
 echo 'Select the .sql file that contains the table to export.'
