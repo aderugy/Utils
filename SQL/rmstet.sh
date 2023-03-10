@@ -5,10 +5,15 @@
 # Author: aderugy
 # First bash script
 #
+#
 # Description:
+#
 # Uploading a .sql file to a mysql database is long. Very long.
 # I had to upload a database of 2 Go and only needed one table for it.
-# With this script, you can import only the usefull statements.
+# With this script, you can import only the needed table (will maybe make it work with multiple).
+#
+#
+# How does it work ?
 #
 # It first looks for the line that creates the table.
 # After creating the table in the database that you have selected,
@@ -16,9 +21,13 @@
 # The INSERT INTO `table` statements are then scrapped and executed
 # in the new database.
 #
+#
 # Remark:
+#
 # The process may stay inactive for a while after processing all the files.
 # This is because MySQL has to execute all the statements one by one.
+
+
 
 echo 'Welcome to the Rugy SQL Table Export tool.'
 echo ''
