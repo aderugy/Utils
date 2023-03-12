@@ -91,15 +91,6 @@ split -l 1000 $path /tmp/database_exporter/$split_path
 echo "Database split."
 echo ''
 
-cleanup() {
-  rm -rf $splitdir
-  rm $output
-}
-
-# Register the cleanup function to be called when the script exits
-trap cleanup EXIT
-
-
 declare -i filecount=0
 
 for file in "$splitdir/$split_path"*
@@ -109,6 +100,15 @@ done
 
 output="$PWD/$table.sql"
 touch $output
+
+cleanup() {
+  rm -rf $splitdir
+  rm $output
+}
+
+# Register the cleanup function to be called when the script exits
+trap cleanup EXIT
+
 
 function writeToDatabase() {
 	echo "$1" >> $output
