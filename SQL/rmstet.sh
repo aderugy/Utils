@@ -32,6 +32,11 @@
 echo 'Welcome to the Rugy MySQL Table Export Tool.'
 echo ''
 echo "Current location: $PWD"
+echo ''
+
+echo 'In current directory:'
+ls
+echo ''
 echo 'Select the .sql file that contains the table to export.'
 read path
 
@@ -103,7 +108,7 @@ touch $output
 
 cleanup() {
   rm -rf $splitdir
-  rm $output
+# rm $output
 }
 
 # Register the cleanup function to be called when the script exits
@@ -131,6 +136,6 @@ done
 
 echo ''
 echo "Writing to database...."
-mysql --user=$username --password=$password -D $db < $output
+#mysql --user=$username --password=$password -D $db < $output
 
 echo "Process completed."
