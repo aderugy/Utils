@@ -108,7 +108,7 @@ touch $output
 
 cleanup() {
   rm -rf $splitdir
-# rm $output
+  rm $output
 }
 
 # Register the cleanup function to be called when the script exits
@@ -130,12 +130,13 @@ do
 		echo "Processing $file ($currentfile/$filecount)"
 	fi
 	result=$(grep -E -e "^INSERT INTO \`$table\`" $file 2>/dev/null)
+	rm -rf $file
 	writeToDatabase "$result"
 	currentfile=`expr $currentfile + 1`
 done
 
 echo ''
 echo "Writing to database...."
-#mysql --user=$username --password=$password -D $db < $output
+mysql --user=$username --password=$password -D $db < $output
 
 echo "Process completed."
