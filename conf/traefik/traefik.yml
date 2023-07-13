@@ -1,0 +1,18 @@
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false
+
+entryPoints: # Définition des points d'écoute
+  web: # Redirection du HTTP vers le HTTPS
+    address: :80
+    http:
+      redirections:
+        entrypoint:
+          to: websecure
+          scheme: https
+  websecure: # HTTPS
+    address: :443 # Port d'écoute HTTPS
+
+providers: # de la configuration dynamique
+  file: # Précision sur la nature de la configuration dynamique (aurait pu être docker par exemple)
+    filename: "/etc/traefik/dynamic_conf.yml"

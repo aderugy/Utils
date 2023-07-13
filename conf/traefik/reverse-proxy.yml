@@ -1,0 +1,30 @@
+tls: # Configuration du TLS
+  certificates: # Initialisation des certificats
+    - certFile: "/etc/traefik/ssl/cert.crt"
+      keyFile: "/etc/traefik/ssl/cert.key"
+
+http: # Configuration du proxy
+  routers: # Définition des routeurs, les requêtes qui matchent les règles seront traitées selon la config
+    to-serv1:
+      entryPoints: # Points d'écoute du routeur, ici uniquement le HTTPS
+        - websecure
+      tls: {} # On utilise TLS
+      rule: "Host(`serv1.aderugy.fr`)" # Définition des règles : ici on vérifie le nom de domaine
+      service: serv1@file # On redirige la requête vers le service 'serv1' en utilisant le provider 'file' (défini dans traefik.yml)
+
+    to-serv2:
+      entryPoints:
+        - websecure
+      tls: {}
+      rule: "Host(`serv2.aderugy.fr`)"
+      service: serv2@file
+
+  services: # Les services sont les destinataires des requêtes, les points de sortie du reverse proxy
+    serv1:
+      loadBalancer:
+        servers:
+          - url: "http://hiddenserver1:42"
+    serv2:
+      loadBalancer:
+        servers:
+          - url: "http://hiddenserver2:42"

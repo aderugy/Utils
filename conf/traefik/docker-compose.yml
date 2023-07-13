@@ -1,0 +1,11 @@
+services:
+  traefik:
+    image: traefik:latest
+    container_name: reverse_proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/USER/traefik:/etc/traefik
