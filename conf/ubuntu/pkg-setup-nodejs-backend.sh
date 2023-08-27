@@ -14,6 +14,7 @@ source "$HOME/.bashrc"
 sudo nvm install --lts
 sudo apt -y install npm
 npm i -g nodemon
+npm i -g pm2
 
 # MySQL
 sudo apt -y install mysql-server
@@ -33,3 +34,7 @@ sudo apt -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 # FirewallD
 sudo apt -y install firewalld
 sudo systemctl stop firewalld
+
+sudo systemctl stop ufw
+
+sudo apt install net-tools
